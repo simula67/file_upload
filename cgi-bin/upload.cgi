@@ -1,5 +1,9 @@
 #!/usr/bin/perl -w
 
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 use strict;
 use CGI;
 use CGI::Carp qw ( fatalsToBrowser );
@@ -12,12 +16,12 @@ my $upload_dir = dirname( __FILE__ ) . "/" .$upload_dir_relative_to_this_script;
 
 my $query = new CGI;
 my $filename = $query->param("upload_file_name");
-my $email_address = $query->param("email_address");
+
 
 if ( !$filename )
 {
     print $query->header ( );
-    print "There was a problem uploading your file (try a smaller file).";
+    print "There was a problem uploading your file.";
     exit;
 }
 
@@ -32,7 +36,7 @@ if ( $filename =~ /^([$safe_filename_characters]+)$/ )
 }
 else
 {
-    die "Filename contains invalid characters";
+    die "Filename contains disallowed characters";
 }
 
 my $upload_filehandle = $query->upload("upload_file_name");
@@ -61,7 +65,6 @@ img {border: none;}
 <body>
 <p>Thanks for uploading your file!</p>
 <p> Your file can be found <a href="$upload_dir_relative_to_this_script/$filename">here</a>
-<p>Your email address: $email_address</p>
 </body>
 </html>
 END_HTML
