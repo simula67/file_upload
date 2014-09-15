@@ -12,7 +12,6 @@ my $upload_dir = dirname( __FILE__ ) . "/" .$upload_dir_relative_to_this_script;
 
 my $query = new CGI;
 my $filename = $query->param("upload_file_name");
-my $email_address = $query->param("email_address");
 
 if ( !$filename )
 {
@@ -61,7 +60,6 @@ img {border: none;}
 <body>
 <p>Thanks for uploading your file!</p>
 <p> Your file can be found <a href="$upload_dir_relative_to_this_script/$filename">here</a>
-<p>Your email address: $email_address</p>
 </body>
 </html>
 END_HTML
