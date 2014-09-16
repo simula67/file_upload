@@ -17,7 +17,6 @@ my $upload_dir = dirname( __FILE__ ) . "/" .$upload_dir_relative_to_this_script;
 my $query = new CGI;
 my $filename = $query->param("upload_file_name");
 
-
 if ( !$filename )
 {
     print $query->header ( );
