@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+#!C:\xampp\perl\bin\perl -w
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -56,14 +57,22 @@ print <<END_HTML;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+<link href="../starter-template.css" rel="stylesheet">
 <title>Thanks!</title>
 <style type="text/css">
 img {border: none;}
 </style>
 </head>
 <body>
-<p>Thanks for uploading your file!</p>
-<p> Your file can be found <a href="$upload_dir_relative_to_this_script/$filename">here</a>
+<div class="container">
+<div class="starter-template">
+<h1>Thanks for uploading your file!</h1>
+<p class="lead"> Your file can be found <a href="$upload_dir_relative_to_this_script/$filename">here</a>
+</div>
+</div>
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
 </body>
 </html>
 END_HTML
