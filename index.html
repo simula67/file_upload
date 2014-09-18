@@ -16,13 +16,15 @@
   </div>
   </div>
   <div>
-    <form action="cgi-bin/upload.cgi" method="post" enctype="multipart/form-data" role="form">
+    <form action="cgi-bin/upload.cgi" method="post" enctype="multipart/form-data">
 	<div class="form-group">
-	  <label for="upload_file_name">File to upload: </label>
-      <input type="file" id= "upload_file_name" name="upload_file_name" />
+	  <label for="upload_file_name" class="col-lg-1">File to upload</label>
+        <div class="col-lg-2">
+      <input class="form-control" type="file" id= "upload_file_name" name="upload_file_name" />
+            </div>
 	</div>
-	<div class="form-group">      
-      <button type="submit" name="Submit" class="btn btn-default">Upload file</button>
+	<div class="form-group">
+      <button type="submit" name="Submit" class="btn btn-danger">Upload file</button>
 	</div>
     </form>
 	</div>
