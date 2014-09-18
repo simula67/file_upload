@@ -18,11 +18,38 @@ my $upload_dir = dirname( __FILE__ ) . "/" .$upload_dir_relative_to_this_script;
 my $query = new CGI;
 my $filename = $query->param("upload_file_name");
 
+sub error_die {
+my $error_message = shift;
+if( $error_message eq "" ) {
+    $error_message = "There was a problem uploading your file!";
+}
+print $query->header ( );
+print <<END_HTML;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+<link href="../static/css/starter-template.css" rel="stylesheet">
+<title>$error_message</title>
+</head>
+<body>
+<div class="container">
+<div class="starter-template">
+<h1>$error_message</h1>
+</div>
+</div>
+<script src="../static/js/jquery-1.11.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>
+END_HTML
+exit;
+}
+
 if ( !$filename )
 {
-    print $query->header ( );
-    print "There was a problem uploading your file.";
-    exit;
+    error_die
 }
 
 my ( $name, $path, $extension ) = fileparse ( $filename, '..*' );
@@ -36,7 +63,7 @@ if ( $filename =~ /^([$safe_filename_characters]+)$/ )
 }
 else
 {
-    die "Filename contains disallowed characters";
+    error_die "Filename contains disallowed characters";
 }
 
 my $upload_filehandle = $query->upload("upload_file_name");
@@ -58,11 +85,8 @@ print <<END_HTML;
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-<link href="../starter-template.css" rel="stylesheet">
+<link href="../static/css/starter-template.css" rel="stylesheet">
 <title>Thanks!</title>
-<style type="text/css">
-img {border: none;}
-</style>
 </head>
 <body>
 <div class="container">
